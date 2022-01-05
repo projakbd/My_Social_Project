@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <title>{% block title_block %} Social {% endblock %}</title>
+  {% block css_block %}
+
+
+  {% endblock %}
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{% url 'App_Posts:home' %}">Home</a>
+          </li>
+
+          &nbsp; &nbsp; &nbsp; &nbsp;
+          <form class="d-flex" method="get">
+            <input class="form-control me-3" type="search" placeholder="Search" aria-label="Search" name="search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+          </form>
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="{% url 'App_Login:logout' %}">Logout</a>
+          </li>
+          <li class="nav-item">
+            {% if user.user_profile.profile_pic %}
+            <a class="nav-link" aria-current="page" href="{% url 'App_Login:profile' %}"><img src="/media/{{ user.user_profile.profile_pic }}" width="30px" height="30px" class="rounded-circle"></a>
+            {% else %}
+            <a class="nav-link" aria-current="page" href="{% url 'App_Login:profile' %}"><img src="/media/default.png" width="30px" height="30px" class="rounded-circle"></a>
+            {% endif %}
+          </li>
+
+        </ul>
+
+      </div>
+    </div>
+  </nav>
+  <div class="container" style="padding-top:30px;">
+    {% block body_block %}
+
+    {% endblock %}
+  </div>
+</body>
+</html>
